@@ -21,6 +21,7 @@ The API requests are explained on the index page of the server. The REST API uri
 - To simplify things the server storage is kept in memory only, nothing is saved to a file or a database. As soon as the server is shutdown: *poof*.
 - The HTTP parser is taken from Boost's example. In hindsight it might've been better to use a library but I didn't want to have too many dependencies. It works for the simple requests this uses.
 - I used clang-format to format the code because I want consistency while not worrying too much about it. The settings are based on Google's C++ guidelines.
+- To simplify things I logged messages directly to std::cout and std:cerr. For a production server a proper logging system should be used.
 
 ## FAQ
 - Why did you name this Eve?
