@@ -1,5 +1,5 @@
-#ifndef EVE_SERVER_SERVER_HPP
-#define EVE_SERVER_SERVER_HPP
+#ifndef EVE_SERVER_EVE_HPP
+#define EVE_SERVER_EVE_HPP
 
 #include <boost/asio.hpp>
 #include <set>
@@ -50,4 +50,4 @@ class Eve
 }  // namespace server
 }  // namespace eve
 
-#endif  // EVE_SERVER_SERVER_HPP
+#endif  // EVE_SERVER_EVE_HPP
