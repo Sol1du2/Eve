@@ -9,20 +9,37 @@ A small client-server application that receives HTTP requests via a REST API. Th
 Built with [CMake 3.19](https://cmake.org/) and compiled with gcc 9.3.0 in Ubuntu 20 LTS
 
 ## How to use
-To run the server:
+Run the server:
 
 `./Eve-Server <address> <port> <smtp_address> <smtp_port>`
 
 The API requests are explained on the index page of the server. The REST API uri is `/jsonApi`
+
+Run the cpp client:
+
+For the client there are different configurations depending on the request:
+
+```
+./Eve-Client GET <address> <port> <email_id>
+./Eve-Client GET_STATUS <address> <port> <email_id>
+./Eve-Client POST <address> <port> <to_email> <from_email> <subject> <body>
+./Eve-Client DELETE <address> <port> <email_id>
+```
+
+- GET: Returns the data (to/from emails, subject and body) of a saved e-mail.
+- GET_STATUS: Returns the status of a saved e-mail (Sending, Sent, Failed, Gave up).
+- POST: Saves an e-mail to the server, which sends it via SMTP.
+- DELETE: Removes an e-mail from the server.
 
 ## Assumptions/Decisions
 - The SMTP client is very simple and does not require authentication.
 - It's a small, simple server. The requests are handled asynchronously but it is mostly single-threaded (except when sending an e-mail via SMTP. Then it does so in a separate thread). For large scale it would be a good idea to build a pool of threads to serve several clients, for example.
 - The SMTP client sends the simplest form of messages. That means it does not use commands like EHLO and assumes no authentication is necessary. It also only supports a sender and a recipient. To clarify, the structure of supported messages is similar to [this example](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol#SMTP_transport_example) found in wikipedia.
 - To simplify things the server storage is kept in memory only, nothing is saved to a file or a database. As soon as the server is shutdown: *poof*.
-- The HTTP parser is taken from Boost's example. In hindsight it might've been better to use a library but I didn't want to have too many dependencies. It works for the simple requests this uses.
+- The HTTP parser is taken from Boost's example. In hindsight it might've been better to use a library but I didn't want to have too many dependencies and I thought that was not the most important part of the exercise. It works for the simple requests this uses but it's far from perfect. A better approach would be necessary on a production server.
 - I used clang-format to format the code because I want consistency while not worrying too much about it. The settings are based on Google's C++ guidelines.
-- To simplify things I logged messages directly to std::cout and std:cerr. For a production server a more robbust logging system should be used.
+- To simplify things I logged messages directly to `std::cout` and `std:cerr`. For a production server a more robust logging system should be used.
+- The client is pretty simple and blocking until a reply comes. I decided to not use much time formatting the json replies from the server as I believe that's a bit out of the scope of this exercise.
 
 ## FAQ
 - Why did you name this Eve?
