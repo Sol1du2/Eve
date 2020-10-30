@@ -18,9 +18,11 @@ The API requests are explained on the index page of the server. The REST API uri
 ## Assumptions/Decisions
 - The SMTP client is very simple and does not require authentication.
 - It's a small, simple server. The requests are handled asynchronously but it is mostly single-threaded (except when sending an e-mail via SMTP. Then it does so in a separate thread). For large scale it would be a good idea to build a pool of threads to serve several clients, for example.
+- The SMTP client sends the simplest form of messages. That means it does not use commands like EHLO and assumes no authentication is necessary. It also only supports a sender and a recipient. To clarify, the structure of supported messages is similar to [this example](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol#SMTP_transport_example) found in wikipedia.
 - To simplify things the server storage is kept in memory only, nothing is saved to a file or a database. As soon as the server is shutdown: *poof*.
 - The HTTP parser is taken from Boost's example. In hindsight it might've been better to use a library but I didn't want to have too many dependencies. It works for the simple requests this uses.
 - I used clang-format to format the code because I want consistency while not worrying too much about it. The settings are based on Google's C++ guidelines.
+- To simplify things I logged messages directly to std::cout and std:cerr. For a production server a more robbust logging system should be used.
 
 ## FAQ
 - Why did you name this Eve?
