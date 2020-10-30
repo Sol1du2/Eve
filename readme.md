@@ -28,7 +28,7 @@ For the client there are different configurations depending on the request:
 
 - GET: Returns the data (to/from emails, subject and body) of a saved e-mail.
 - GET_STATUS: Returns the status of a saved e-mail (Sending, Sent, Failed, Gave up).
-- POST: Saves an e-mail to the server, which sends it via SMTP.
+- POST: Saves an e-mail to the server, which sends it via SMTP. The client will pool the server every 10 seconds for the status until, either the E-mail is sent successfully, or the server gives up after too many failed attempts.
 - DELETE: Removes an e-mail from the server.
 
 ## Assumptions/Decisions
