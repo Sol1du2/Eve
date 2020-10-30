@@ -63,7 +63,7 @@ void Smtp_client::send_message(const std::string& from_email,
   }
 
   close_socket();
-}  // namespace smtp
+}
 
 void Smtp_client::read_smtp_message(const std::string& expected_code)
 {

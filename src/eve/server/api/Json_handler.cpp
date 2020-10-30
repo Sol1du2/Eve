@@ -248,6 +248,12 @@ void Json_handler::send_smtp_email(const std::string& from_email,
             storage.change_email_status(
                 email_uuid,
                 eve::server::data::Data_definition::Email_status::Failed);
+
+            // Wait 2 minutes and then try again. Unless this was the last try.
+            if (try_number + 1 < config::eve_config.num_tries_smtp_email)
+            {
+              std::this_thread::sleep_for(std::chrono::minutes(2));
+            }
           }
 
           ++try_number;

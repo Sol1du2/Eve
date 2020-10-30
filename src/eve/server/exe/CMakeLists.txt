@@ -3,7 +3,7 @@ add_executable(Eve-Server
 )
 
 target_link_libraries(Eve-Server PUBLIC 
-  Eve-Lib
+  Eve-Server-Lib
 )
 
 target_include_directories(Eve-Server PUBLIC 

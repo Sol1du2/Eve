@@ -1,4 +1,3 @@
-#include <boost/asio.hpp>
 #include <iostream>
 
 #include "../Eve.hpp"
@@ -16,11 +15,11 @@ int main(int argc, char* argv[])
   {
     eve::server::Eve server(argv[1], argv[2], argv[3], argv[4]);
     server.run();
-    std::cout << "Eve gracefully shutting down...";
+    std::cout << "Eve gracefully shutting down..." << std::endl;
   }
   catch (const std::exception& exception)
   {
-    std::cerr << "Error: " << exception.what() << "\n";
+    std::cerr << "Error: " << exception.what() << std::endl;
     return -1;
   }
 
