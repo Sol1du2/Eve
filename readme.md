@@ -9,13 +9,13 @@ A small client-server application that receives HTTP requests via a REST API. Th
 Built with [CMake 3.19](https://cmake.org/) and compiled with gcc 9.3.0 in Ubuntu 20 LTS
 
 ## How to use
-Run the server:
+**Run the server:**
 
 `./Eve-Server <address> <port> <smtp_address> <smtp_port>`
 
 The API requests are explained on the index page of the server. The REST API uri is `/jsonApi`
 
-Run the cpp client:
+**Run the cpp client:**
 
 For the client there are different configurations depending on the request:
 
@@ -31,7 +31,7 @@ For the client there are different configurations depending on the request:
 - POST: Saves an e-mail to the server, which sends it via SMTP. The client will pool the server every 10 seconds for the status until, either the E-mail is sent successfully, or the server gives up after too many failed attempts.
 - DELETE: Removes an e-mail from the server.
 
-Run the Javascript/HTML client:
+**Run the Javascript/HTML client:**
 
 Because of CORS the security flag needs to be disabled if the code is to be run in a browser. The interface contains 4 buttons to switch to the different types of requests. The buttons set the correct input boxes for the request. After filling them up, all you need to do is press the **send** button. Do not add `http://` to the Server input box as that is done automatically. The functionality is the same as the cpp client. It will also continuously pool the server for the e-mail status after sending.
 
