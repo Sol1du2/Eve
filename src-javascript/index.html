@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script type="module" src="./scripts/main.js"></script>
+    <style>
+      div.main-area 
+      {
+        padding-bottom: 10px;
+      }
+      ul
+      {
+        list-style: none;
+        padding: 0;
+      }
+      fieldset label{
+        display: inline-block;
+        width: 100px;
+      }
+      fieldset{
+        border:none;
+        width:300px;
+      }
+      #loading
+      {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-area">
+      <label for="address-box">Server:</label>
+      <input type="text" id="address-box" name="address-box">
+      <label for="port-box">Port:</label>
+      <input type="text" id="port-box" name="port-box">
+    </div>
+    <div class="main-area" id="buttons">
+      <button id="get-mail-button" type="button">
+        Get E-mail
+      </button>
+      <button id="get-status-button" type="button">
+        Get E-mail Status
+      </button>
+      <button id="send-mail-button" type="button">
+        Send E-mail
+      </button>
+      <button id="delete-mail-button" type="button">
+        Delete E-mail
+      </button>
+    </div>
+    <div class="main-area" id="input-area"></div>
+    <div class="main-area">
+      <button id="send-button" type="button">
+        Send
+      </button>
+      <div id="loading"></div>
+    </div>
+    <div class="main-area" id="result-area">
+
+    </div>
+  </body>
+</html>
