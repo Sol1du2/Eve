@@ -38,7 +38,7 @@ eve::msg::Reply Json_handler::handle(const eve::msg::Request& request,
   }
   else if (request.method == "POST")
   {
-    return handle_post(request.body);
+    return handle_post(request.content);
   }
   else if (request.method == "DELETE")
   {

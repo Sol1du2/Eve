@@ -1,6 +1,7 @@
 #ifndef EVE_MSG_REQUEST_HPP
 #define EVE_MSG_REQUEST_HPP
 
+#include <boost/asio/buffer.hpp>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -21,20 +22,14 @@ struct Request
   int content_length;
   std::vector<Header> headers;
 
-  std::string body;
+  std::string content;
 
-  std::string to_string() const
-  {
-    std::stringstream stream;
-    for (const auto& header : headers)
-    {
-      stream << header.to_string();
-    }
-    stream << "Version: " << http_version_major << "." << http_version_minor
-           << "\nMethod: " << method << "\nUri: " << uri << "\nBody:\n"
-           << body << "\n";
-    return stream.str();
-  }
+  /// Convert the reply into a vector of buffers. The buffers do not own the
+  /// underlying memory blocks, therefore the reply object must remain valid and
+  /// not be changed until the write operation has completed.
+  std::vector<boost::asio::const_buffer> to_buffers() const;
+
+  std::string to_string() const;
 };
 
 }  // namespace msg

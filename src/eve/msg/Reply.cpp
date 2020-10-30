@@ -80,6 +80,30 @@ std::string to_string(Reply::Status_type status)
 
 }  // namespace
 
+void Reply::set_status(const std::string& string_status)
+{
+  if (string_status == "200")
+  {
+    status = Reply::Status_type::Ok;
+  }
+  else if (string_status == "404")
+  {
+    status = Reply::Status_type::Not_found;
+  }
+  else if (string_status == "400")
+  {
+    status = Reply::Status_type::Bad_request;
+  }
+  else if (string_status == "500")
+  {
+    status = Reply::Status_type::Internal_server_error;
+  }
+  else if (string_status == "501")
+  {
+    status = Reply::Status_type::Not_implemented;
+  }
+}
+
 std::vector<boost::asio::const_buffer> Reply::to_buffers() const
 {
   std::vector<boost::asio::const_buffer> buffers;

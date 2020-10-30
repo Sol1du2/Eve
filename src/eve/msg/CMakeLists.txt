@@ -1,5 +1,6 @@
 add_library(Messaging 
   Http_parser.cpp
+  Request.cpp
   Reply.cpp
 )
 
