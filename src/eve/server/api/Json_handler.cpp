@@ -81,7 +81,7 @@ eve::msg::Reply Json_handler::handle_get(const std::string& args) const
       }
       catch (const std::exception&)
       {
-        json_reply["not_found"] = "Email message not found";
+        json_reply["error"]["message"] = "Email message not found";
       }
     }
     else
@@ -158,16 +158,16 @@ eve::msg::Reply Json_handler::handle_delete(const std::string& args) const
       const auto uuid = boost::uuids::string_generator()(split_args.back());
       if (data_storage.remove_email(uuid))
       {
-        json_reply["deleted"] = "Email message deleted";
+        json_reply["success"] = "Email message deleted";
       }
       else
       {
-        json_reply["not_found"] = "Email message not found";
+        json_reply["error"]["message"] = "Email message not found";
       }
     }
     catch (const std::exception&)
     {
-      json_reply["not_found"] = "Email message not found";
+      json_reply["error"]["message"] = "Email message not found";
     }
   }
   else

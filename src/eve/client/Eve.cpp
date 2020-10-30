@@ -84,7 +84,7 @@ bool Eve::delete_email(const std::string& id)
     nlohmann::json json_content = nlohmann::json::parse(reply.content);
 
     close();
-    return json_content.contains("deleted") ? true : false;
+    return json_content.contains("success") ? true : false;
   }
   catch (const std::exception& exception)
   {
@@ -117,9 +117,14 @@ std::string Eve::get_email(const std::string& id)
 
     close();
 
-    std::stringstream stream;
-    stream << json_content;
-    return stream.str();
+    const auto error_it = json_content.find("error");
+    if (error_it == json_content.end())
+    {
+      std::stringstream stream;
+      stream << json_content;
+      return stream.str();
+    }
+    return (*error_it)["message"];
   }
   catch (const std::exception& exception)
   {
@@ -151,8 +156,12 @@ std::string Eve::get_email_status(const std::string& id)
     nlohmann::json json_content = nlohmann::json::parse(reply.content);
 
     close();
-    const auto status_it = json_content.find("status");
-    return status_it != json_content.end() ? *status_it : "Not found";
+    const auto status_it = json_content.find("error");
+    if (status_it == json_content.end())
+    {
+      return json_content["status"];
+    }
+    return (*status_it)["message"];
   }
   catch (const std::exception& exception)
   {

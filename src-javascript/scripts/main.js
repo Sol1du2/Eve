@@ -73,8 +73,8 @@ async function onSendClicked()
       try
       {
         const jsonReply = await client.getEmail(emailId.value);
-        const msg = jsonReply.to_email ? 
-            "Email\n: " + JSON.stringify(jsonReply) : "Email not found";
+        const msg = jsonReply.error ?
+            jsonReply.error.message : "Email\n: " + JSON.stringify(jsonReply);
         document.getElementById("result-area").innerHTML = msg;
       }
       catch (error)
@@ -89,8 +89,8 @@ async function onSendClicked()
       try
       {
         const jsonReply = await client.getEmailStatus(emailId.value);
-        const msg = jsonReply.status ? 
-            "Email status: " + jsonReply.status : "Email not found";
+        const msg = jsonReply.error ?
+            jsonReply.error.message : "Email status: " + jsonReply.status;
         document.getElementById("result-area").innerHTML = msg;
       }
       catch (error)
@@ -151,8 +151,8 @@ async function onSendClicked()
       try
       {
         const jsonReply = await client.deleteEmail(emailId.value);
-        const msg = jsonReply.deleted ? 
-            "Email deleted." : "Email not found.";
+        const msg = jsonReply.error ? 
+            jsonReply.error.message : jsonReply.success;
         document.getElementById("result-area").innerHTML = msg;
       }
       catch (error)
