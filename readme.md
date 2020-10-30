@@ -35,7 +35,7 @@ For the client there are different configurations depending on the request:
 
 Because of CORS the security flag needs to be disabled if the code is to be run in a browser. The interface contains 4 buttons to switch to the different types of requests. The buttons set the correct input boxes for the request. After filling them up, all you need to do is press the **send** button. Do not add `http://` to the Server input box as that is done automatically. The functionality is the same as the cpp client. It will also continuously pool the server for the e-mail status after sending.
 
-Another thing to note about this client is that, because I am using Javascript modules, the index.html can not be run directly from the file system. This is because modules require the MIME of the script file to be a Javascript MIME type. The file system won't provide a MIME so the loading of the script will fail. To run this client I installed the[http-server](https://www.npmjs.com/package/http-server) package available via npm.
+Another thing to note about this client is that, because I am using Javascript modules, the `index.html` can not be run directly from the file system. This is because modules require the MIME of the script file to be a Javascript MIME type. The file system won't provide a MIME so the loading of the script will fail. To run this client I installed the [http-server](https://www.npmjs.com/package/http-server) package available via npm.
 
 ## Assumptions/Decisions
 - The SMTP client is very simple and does not require authentication.
